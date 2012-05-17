@@ -22,3 +22,6 @@ public AudioStream getInputStream(int type, int bufferSize, float sampleRate, in
   return stream;
 }
 ```
+buffersize:512
+sampleRate:10kHz*2 -> 20kHz?
+bitDepth:none
