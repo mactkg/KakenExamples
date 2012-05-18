@@ -1,3 +1,0 @@
-主にProcessingについて
-smoothやstroke、fillとか
-classも作ってみる
