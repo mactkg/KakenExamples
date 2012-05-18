@@ -9,3 +9,7 @@
 - 簡単なクラスや関数の作り方
 
 など
+
+## attached sound by
+- LIFTING OF THE CLOSURE(HI-KU)
+ - http://andworkspace.net/kuramu/

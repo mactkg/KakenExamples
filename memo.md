@@ -1,5 +1,6 @@
 minim.getInputStreamが使えるかも
 ```Java
+from:ddf/minim/Minim.java
 /**
  * Get the input as an AudioStream that you can read from yourself, rather
  * than wrapped in an AudioInput that does that work for you.
@@ -22,6 +23,6 @@ public AudioStream getInputStream(int type, int bufferSize, float sampleRate, in
   return stream;
 }
 ```
-buffersize:512
-sampleRate:10kHz*2 -> 20kHz?
-bitDepth:none
+- buffersize:512
+- sampleRate:10kHz * 2 -> 20kHz?
+- bitDepth:none
