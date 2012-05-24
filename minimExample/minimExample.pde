@@ -10,12 +10,12 @@
 import ddf.minim.*;
 
 Minim minim; //Minim object
-AudioPlayer player //AudioPlayer object (for play a sound)
+AudioPlayer player; //AudioPlayer object (for play a sound)
 
 void setup(){
   size(100, 100); //set up canvas
   minim = new Minim(this); //init Minim
-  player = minim.loadFile("music.wav"); //load the sound data
+  player = minim.loadFile("music.mp3"); //load the sound data
   player.play();
 }
 
