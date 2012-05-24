@@ -12,7 +12,7 @@
 
 # musclelib(temp)
 ## Useage
-```
+``` java
 // make instance
 Muscle mus;
 
