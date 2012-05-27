@@ -13,6 +13,7 @@
 # やってほしいこと
 ## Processingのインストール
 http://processing.org/
+から落としてインストール！！！！
 
 ## Arduinoライブラリのインストール
 Processingのフォルダがどこかにできるので、
