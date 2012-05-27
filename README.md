@@ -12,7 +12,7 @@
 
 # musclelib(temp)
 ## Useage
-```
+``` .java
 // make instance
 Muscle mus;
 
@@ -22,7 +22,7 @@ void setup(){
 
 void draw(){
   if(mus.isCalibrated){
-    mus.calibrate(mus.value());
+    mus.calibrate(mus.getRawData()[0]);
   } else {
     //mus.getValue return a value of a sensor(int) between 0 and 1024
     print("mus:" + mus.getValue());    
