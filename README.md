@@ -12,12 +12,12 @@
 
 # musclelib(temp)
 ## Useage
-``` .java
+``` java
 // make instance
 Muscle mus;
 
 void setup(){
-  mus = Musble(this);
+  mus = Muscle(this);
 }
 
 void draw(){
@@ -31,6 +31,7 @@ void draw(){
     for(int i = 0; i < 20; i++){
       print("mus[" + i + "]:" + data[i])
     }
+  }
 }
 ```
 
