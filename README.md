@@ -11,7 +11,7 @@
 など
 
 # やってほしいこと
-## Processingを落とす
+## Processingのインストール
 http://processing.org/
 
 ## Arduinoライブラリのインストール
