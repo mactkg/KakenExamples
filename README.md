@@ -10,6 +10,15 @@
 
 など
 
+# やってほしいこと
+## Processingを落とす
+http://processing.org/
+
+## Arduinoライブラリのインストール
+Processingのフォルダがどこかにできるので、
+Arduinoのライブラリをどこかから落としてきてliblaryフォルダのなかにいれる。
+なかったらフォルダ作る
+
 # musclelib(temp)
 ## Useage
 ``` java
