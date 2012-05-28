@@ -25,7 +25,7 @@ class Muscle {
     //input Data
     float buf[] = new float[20];
     arrayCopy(rawData, 1, buf, 0, 19);
-    buf[19] = arduino.analogRead(10);
+    buf[19] = arduino.analogRead(0);
     arrayCopy(buf, rawData);
     
     //calculate Average of Data
@@ -36,13 +36,31 @@ class Muscle {
 }
 
 Muscle mus;
+int i;
+
 void setup(){
   println("setup");
   mus = new Muscle(this);
+  size(1280, 800);
+  i = 0;
+  
+  colorMode(HSB);
+  
+  background(255);
 }
 
 void draw(){
   mus.update();
-  println(mus.avrVal);
-  line(0, 0, mouseX, mouseY);
+  println(mus.avrVal + ", " + mus.avrVal/1024*height);
+  fill(mus.avrVal/1024*255, 70, 255);
+  stroke(mus.avrVal/1024*255, 70, 255);
+  ellipse(i*2, mus.avrVal/1024*height, 3, 3);
+  i++;
+  if(i*2 > width) {
+    i = 0;
+    stroke(255, 0, 255, 70);
+    fill(255, 0, 255, 70);
+    rect(0, 0, width, height);
+    fill(0);
+  }
 }
