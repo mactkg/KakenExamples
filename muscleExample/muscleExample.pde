@@ -1,10 +1,13 @@
 import ddf.minim.*;
+import ddf.minim.analysis.*;
 import processing.serial.*;
 import cc.arduino.*;
 
 class Muscle {
   Arduino arduino;
   Minim minim;
+  FFT fft;
+  
   float rawData[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
   float avrVal = 0;
@@ -15,6 +18,7 @@ class Muscle {
     println("Arduino ready.");
     minim = new Minim(that);
     println("Minim ready.");
+    fft = new FFT()
   }
   
   void setup(){
@@ -51,15 +55,18 @@ void setup(){
 
 void draw(){
   mus.update();
-  println(mus.avrVal + ", " + mus.avrVal/1024*height);
-  fill(mus.avrVal/1024*255, 70, 255);
-  stroke(mus.avrVal/1024*255, 70, 255);
-  ellipse(i*2, mus.avrVal/1024*height, 3, 3);
+  float data = mus.rawData[19];
+  println(data + ", " + data/1024*600);
+  //fill(data/1024*255, 70, 255);
+  //stroke(data/1024*255, 70, 255);
+  fill(0);
+  stroke(0);
+  ellipse(i*2, data/1024*600 + 100, 3, 3);
   i++;
   if(i*2 > width) {
     i = 0;
-    stroke(255, 0, 255, 70);
-    fill(255, 0, 255, 70);
+    stroke(255, 0, 255, 90);
+    fill(255, 0, 255, 90);
     rect(0, 0, width, height);
     fill(0);
   }
