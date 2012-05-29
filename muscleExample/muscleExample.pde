@@ -18,7 +18,7 @@ class Muscle {
     println("Arduino ready.");
     minim = new Minim(that);
     println("Minim ready.");
-    fft = new FFT()
+    //fft = new FFT();
   }
   
   void setup(){
