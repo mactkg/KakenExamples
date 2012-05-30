@@ -45,6 +45,10 @@ void draw(){
 }
 ```
 
-## attached sound by
+## attached...
+### sound by
 - LIFTING OF THE CLOSURE(HI-KU)
  - http://andworkspace.net/kuramu/
+### font by
+- mosamosa.ttf
+ - http://lovalotta.pya.jp/mosamosa/
