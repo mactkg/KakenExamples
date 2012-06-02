@@ -13,6 +13,7 @@ int lHeight;
 void setup(){
   println("setup");
   mus = new Muscle(this);
+  mus.setup();
   textFont(createFont("mosamosa.ttf", 12));
   
   size(1280, 800);
@@ -43,9 +44,9 @@ void draw(){
   stroke(0);
   ellipse(i*2, data/1024*600 + 100, 3, 3);*/
   
-  line(i*2, mus.rawData[17]/1024*lHeight-50, i*2 + 1, mus.rawData[18]/1024*lHeight-50);
-  line(i*2, mus.rawData[18]/1024*lHeight-50, i*2 + 1, mus.rawData[19]/1024*lHeight-50);
-  if(abs(mus.rawData[19-chkWidth] - mus.rawData[19]) > threadshold) {
+  line(i*2, mus.rawData[2]/1024*lHeight-50, i*2 + 1, mus.rawData[1]/1024*lHeight-50);
+  line(i*2, mus.rawData[1]/1024*lHeight-50, i*2 + 1, mus.rawData[0]/1024*lHeight-50);
+  if(abs(mus.rawData[0+chkWidth] - mus.rawData[0]) > threadshold) {
     fill(138, 120, 180);
     rect(i*2, 50, 3, 40);
     println(millis() + ":17/19!!!");
@@ -75,10 +76,11 @@ void keyPressed(){
 
 }
 
-////////////////////
-/* Custom Classes */
-////////////////////
+////////////////////////
+/*   Custom Classes   */
+////////////////////////
 class Muscle {
+  PApplet that;
   Arduino arduino;
   Minim minim;
   FFT fft;
@@ -87,30 +89,82 @@ class Muscle {
                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
   float avrVal = 0;
   
-  Muscle(PApplet that){
+  Muscle(PApplet p){
+    that = p;
+    setup();
+  }
+  
+  //////////////////
+  /*   setup!!!   */
+  //////////////////
+  void setup(){
     println("!MUSCLE SETUP!");
     arduino = new Arduino(that, Arduino.list()[0], 57600);
     println("Arduino ready.");
     minim = new Minim(that);
     println("Minim ready.");
-    //fft = new FFT();
+    fft = new FFT(512, 44100);
+    println("Ready for FFT.")
   }
   
-  void setup(){
-    println("yet");
-  }
-  
+  ///////////////////
+  /*   update!!!   */
+  ///////////////////
   void update(){
     //input Data
     float buf[] = new float[20];
-    arrayCopy(rawData, 1, buf, 0, 19);
-    buf[19] = arduino.analogRead(0);
+    arrayCopy(rawData, 1, buf, 1, 19);
+    buf[0] = arduino.analogRead(0);
     arrayCopy(buf, rawData);
     
     //calculate Average of Data
     float avrBuf = 0;
     for(int i = 0; i < 20; i++) avrBuf += buf[i];
     avrVal = avrBuf / 20;  
+    
+    //fft!!!
+    fft.forward(this.rawData[0]);
+  }
+  
+  ////////////////////
+  /*   getters!!!   */
+  ////////////////////
+  Arduino getArduino(){
+    //return Arduino object
+    return this.arduino;
+  }
+  
+  float[] getRawData(){
+    //return array included raw data
+    return this.rawData;
+  }
+  
+  FFT getFFT(){
+    //return FFT object
+    return this.FFT;
+  }
+  
+  
+  float getAvrVal(){
+    //return avraged data
+    return this.avrVal;
+  }
+  
+  float getFFTdata(int i){
+    //return fft-ed data
+    //@i : frequency band
+    return this.fft.getBand(i);
+  }
+  
+  //////////////////
+  /*   recorder   */
+  //////////////////
+  void beginRecord(){
+    String name = year() + "_" + month() + "_" + day() + "_" + hour + "_" + minute() + "_" + second();
+    this.beginRecord(name);
+  }
+  
+  void beginRecord(String name){
   }
 }
 
