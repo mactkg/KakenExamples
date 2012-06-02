@@ -15,10 +15,10 @@ void setup(){
   colorMode(HSB);
   
   minim = new Minim(this); //init Minim
-  player = minim.loadFile("music.mp3"); //load the sound data
+  player = minim.loadFile("../bin/music.mp3"); //load the sound data
   
   fft = new FFT(player.bufferSize(), player.sampleRate()); //init FFT
-  textFont(createFont("mosamosa.ttf", 12)); //Set up a font
+  textFont(createFont("../bin/mosamosa.ttf", 12)); //Set up a font
   
   player.play(); //Play a sound
 }

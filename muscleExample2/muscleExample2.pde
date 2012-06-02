@@ -11,7 +11,7 @@ float data;
 void setup(){
   println("setup");
   mus = new Muscle(this);
-  textFont(createFont("mosamosa.ttf", 12));
+  textFont(createFont("../bin/mosamosa.ttf", 12));
   
   size(1280, 800);
   i = 0;
