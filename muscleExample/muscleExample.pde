@@ -52,11 +52,6 @@ void draw(){
     println(millis() + ":17/19!!!");
   }
   println("threadshold:" + threadshold + ", chkWidth:" + chkWidth);
-  /*f(abs(mus.rawData[18] - mus.rawData[19]) > 90) {
-    println(millis() + ":18/19!!!");
-    fill(138, 120, 180);
-    rect(i*2, 50, 3, 40);
-  }*/
   i += 3;
   if(i*2 > width) {
     i = 0;
@@ -83,7 +78,6 @@ class Muscle {
   PApplet that;
   Arduino arduino;
   Minim minim;
-  FFT fft;
   
   float rawData[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -103,8 +97,6 @@ class Muscle {
     println("Arduino ready.");
     minim = new Minim(that);
     println("Minim ready.");
-    fft = new FFT(512, 44100);
-    println("Ready for FFT.")
   }
   
   ///////////////////
@@ -121,9 +113,6 @@ class Muscle {
     float avrBuf = 0;
     for(int i = 0; i < 20; i++) avrBuf += buf[i];
     avrVal = avrBuf / 20;  
-    
-    //fft!!!
-    fft.forward(this.rawData[0]);
   }
   
   ////////////////////
@@ -139,21 +128,9 @@ class Muscle {
     return this.rawData;
   }
   
-  FFT getFFT(){
-    //return FFT object
-    return this.FFT;
-  }
-  
-  
   float getAvrVal(){
     //return avraged data
     return this.avrVal;
-  }
-  
-  float getFFTdata(int i){
-    //return fft-ed data
-    //@i : frequency band
-    return this.fft.getBand(i);
   }
   
   //////////////////
