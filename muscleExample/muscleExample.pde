@@ -16,13 +16,12 @@ void setup(){
   textFont(createFont("../bin/mosamosa.ttf", 12));
   
   size(1280, 800);
-  i = 0;
-  
-  data = 0;
-  
   smooth();
   colorMode(HSB);
   background(40);
+  
+  i = 0;
+  data = 0;
   chkWidth = 1;
   threadshold = 100;
   lHeight = height - 100;
@@ -66,6 +65,11 @@ void draw(){
   }
 }
 
+void stop(){
+  muscle.stop();
+  super.stop();
+}
+
 void keyPressed(){
   if(key == 'c') isAvr = !isAvr;
   if(key == 'w') threadshold++;
@@ -81,7 +85,7 @@ void keyPressed(){
 class Muscle {
   Arduino arduino;
   Minim minim;
-  FFT fft;
+  //FFT fft;
   
   float rawData[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -111,6 +115,10 @@ class Muscle {
     float avrBuf = 0;
     for(int i = 0; i < 20; i++) avrBuf += buf[i];
     avrVal = avrBuf / 20;  
+  }
+  
+  void stop(){
+    this.minim.stop();
   }
 }
 
