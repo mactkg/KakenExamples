@@ -85,8 +85,6 @@ void keyPressed(){
 class Muscle {
   Arduino arduino;
   Minim minim;
-  PrintWriter outp;
-  boolean isRecording;
   //FFT fft;
   
   float rawData[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -94,23 +92,11 @@ class Muscle {
   float avrVal = 0;
   
   Muscle(PApplet that){
-    Muscle(that, false);
-  }
-  
-  Muscle(PApplet that, boolean record){
     println("!MUSCLE SETUP!");
     arduino = new Arduino(that, Arduino.list()[0], 57600);
     println("Arduino ready.");
     minim = new Minim(that);
     println("Minim ready.");
-    if(record){
-      String name = year() + "_" + month() * "_" + day() + "_" + hour() * "_" + minute() + "_" + second();
-      outp = createWriter(name);
-      println("ready for save:" + name);
-      isRecording = true;
-    } else {
-      isRecording = false;
-    }
     //fft = new FFT();
   }
   
@@ -128,15 +114,10 @@ class Muscle {
     //calculate Average of Data
     float avrBuf = 0;
     for(int i = 0; i < 20; i++) avrBuf += buf[i];
-    avrVal = avrBuf / 20;
-    
-    if(isRecording)
-      outp.print(rawData[19] + ",");
+    avrVal = avrBuf / 20;  
   }
   
   void stop(){
-    outp.flush();
-    outp.close();
     this.minim.stop();
   }
 }
