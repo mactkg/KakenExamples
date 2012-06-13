@@ -9,6 +9,7 @@ boolean isAvr;
 float data;
 int chkWidth, threadshold;
 int lHeight;
+int timeWidth;
 
 void setup(){
   println("setup");
@@ -25,6 +26,7 @@ void setup(){
   chkWidth = 1;
   threadshold = 100;
   lHeight = height - 100;
+  timeWidth = 5;
 }
 
 void draw(){
@@ -33,29 +35,28 @@ void draw(){
     data = mus.rawData[0];
   else
     data = mus.avrVal;
-  //debug
-  //println(millis() + ":" + data + ", " + data/1024*600);
-  fill(data/1024*255, 70, 255);
-  stroke(data/1024*255, 70, 255);
+
+  fill(255);
+  stroke(255);
   
-  /*fill(0);
-  stroke(0);
-  ellipse(i*2, data/1024*600 + 100, 3, 3);*/
+  //draw the graph
+  noFill();
+  curve(int((i-3*timeWidth)*2), int((mus.rawData[16]-0.5)/1024*lHeight),
+        int((i-2*timeWidth)*2), int((mus.rawData[17]-0.5)/1024*lHeight),
+        int((i-timeWidth)*2), int((mus.rawData[18]-0.5)/1024*lHeight),
+        int(i*2), int((mus.rawData[19]-0.5)/1024*lHeight));
   
-  line(i*2, mus.rawData[17]/1024*lHeight-50, i*2 + 1, mus.rawData[18]/1024*lHeight-50);
-  line(i*2, mus.rawData[18]/1024*lHeight-50, i*2 + 1, mus.rawData[19]/1024*lHeight-50);
+  //judging data
   if(abs(mus.rawData[19-chkWidth] - mus.rawData[19]) > threadshold) {
-    fill(138, 120, 180);
+    fill(0);
     rect(i*2, 50, 3, 40);
     println(millis() + ":17/19!!!");
   }
   println("threadshold:" + threadshold + ", chkWidth:" + chkWidth);
-  /*f(abs(mus.rawData[18] - mus.rawData[19]) > 90) {
-    println(millis() + ":18/19!!!");
-    fill(138, 120, 180);
-    rect(i*2, 50, 3, 40);
-  }*/
-  i += 3;
+  
+  i += timeWidth;
+  
+  //clearing
   if(i*2 > width) {
     i = 0;
     stroke(255, 0, 40, 255);
@@ -66,7 +67,7 @@ void draw(){
 }
 
 void stop(){
-  muscle.stop();
+  mus.stop();
   super.stop();
 }
 
